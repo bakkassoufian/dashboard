@@ -28,15 +28,7 @@ import { api } from '../api/client';
 import html2canvas from 'html2canvas';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as ReTooltip } from 'recharts';
 
-const GLOBAL_STATS = {
-  total: 198000,
-  odc: 32100,
-  fab: 410,
-  supercodeurs: 154500,
-  cyber: 4300,
-  partners: 60,
-  trainings: 775
-};
+import { GLOBAL_STATS } from '../data/odcStats';
 
 export default function Reports() {
   const [stats, setStats] = useState(null);

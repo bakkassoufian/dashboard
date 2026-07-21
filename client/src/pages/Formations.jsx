@@ -6,6 +6,7 @@ import PageHeader from '../components/PageHeader';
 import { useAuth } from '../context/AuthContext';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from 'recharts';
 import { STATIC_STATS } from '../data/staticStats';
+import { GLOBAL_STATS } from '../data/odcStats';
 
 function getCurrentMonthRange() {
   const now = new Date();
@@ -289,8 +290,8 @@ export default function Formations() {
     }
 
     // Cumulative fallbacks
-    const CUMULATIVE_FORMATIONS = 775;
-    const CUMULATIVE_PARTICIPANTS = 32100;
+    const CUMULATIVE_FORMATIONS = GLOBAL_STATS.trainings;
+    const CUMULATIVE_PARTICIPANTS = GLOBAL_STATS.total;
 
     let displayFormations = 0;
     let displayParticipants = 0;

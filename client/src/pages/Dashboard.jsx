@@ -39,6 +39,7 @@ import {
   Legend
 } from 'recharts';
 import { STATIC_STATS } from '../data/staticStats';
+ import { DATA_A_JOUR, S1_2026, GLOBAL_STATS } from '../data/odcStats';
 
 function CountUp({ end, duration = 1500, suffix = '', prefix = '' }) {
   const [count, setCount] = useState(0);
@@ -60,75 +61,6 @@ function CountUp({ end, duration = 1500, suffix = '', prefix = '' }) {
 
   return <span>{prefix}{count.toLocaleString()}{suffix}</span>;
 }
-
-// CHIFFRES À JOUR (Pour les Analyses & Graphiques)
-// Source : tableau de suivi ODC Maroc, arrêté au S1 2026.
-// NB : ne jamais écrire les milliers avec un point (7.174 vaut 7,174 en JS).
-// Total = somme exacte du détail : 39 274 = 17 476 F + 21 798 H.
-const DATA_A_JOUR = {
-  total: 39274,
-  years: [
-    { year: '2021', participants: 1727, women: 850, men: 877 },
-    { year: '2022', participants: 8278, women: 4165, men: 4113 },
-    { year: '2023', participants: 4701, women: 1978, men: 2723 },
-    { year: '2024', participants: 6152, women: 2417, men: 3735 },
-    { year: '2025', participants: 11242, women: 4619, men: 6623 },
-    { year: 'S1 2026', participants: 7174, women: 3447, men: 3727 },
-  ],
-  totalWomen: 17476,
-  totalMen: 21798,
-};
-
-// DÉTAIL S1 2026 — le mensuel et le détail par entité totalisent 7 174 chacun.
-const S1_2026 = {
-  months: [
-    { month: 'Janvier', participants: 472, women: 167, men: 305 },
-    { month: 'Février', participants: 312, women: 166, men: 146 },
-    { month: 'Mars', participants: 784, women: 379, men: 405 },
-    { month: 'Avril', participants: 1751, women: 1016, men: 735 },
-    { month: 'Mai', participants: 440, women: 204, men: 236 },
-    { month: 'Juin', participants: 3415, women: 1515, men: 1900 },
-  ],
-  byEntity: [
-    { entity: 'ODC SM', type: 'EDC', participants: 260 },
-    { entity: 'ODC FSBM', type: 'EDC', participants: 1397 },
-    { entity: 'ODC Rabat', type: 'EDC', participants: 630 },
-    { entity: 'ODC Rabat', type: 'FabLab', participants: 251 },
-    { entity: 'ODC Agadir', type: 'EDC', participants: 2310 },
-    { entity: 'ODC Agadir', type: 'FabLab', participants: 173 },
-    { entity: 'Orange Fab', type: 'Orange Fab', participants: 503 },
-    { entity: 'Stage PFE', type: 'EDC', participants: 7 },
-    { entity: 'Evenements/Talk', type: 'EDC', participants: 554 },
-    { entity: 'Hackathons', type: 'ODC', participants: 1070 },
-    { entity: 'En ligne', type: 'ODC', participants: 19 },
-  ],
-  // Nombre de formations S1 2026 (total 143)
-  formations: [
-    { type: 'Formations EDC', count: 88 },
-    { type: 'Workshop Fablab', count: 29 },
-    { type: 'Stage', count: 3 },
-    { type: 'Super codeur', count: 10 },
-    { type: 'PRP', count: 2 },
-    { type: "ODC'S Talk", count: 5 },
-    { type: 'Orange Fab', count: 4 },
-    { type: 'Hackathon', count: 1 },
-    { type: 'En ligne', count: 1 },
-  ],
-  totalFormations: 143,
-};
-
-// CHIFFRES GLOBAUX (Pour le Hero / Overview par défaut)
-// total / odc proviennent du suivi ODC Maroc (DATA_A_JOUR) : chiffres vérifiables.
-// fab / supercodeurs / cyber / partners restent des valeurs institutionnelles
-// codées en dur, sans source dans la base — à réviser quand les données existeront.
-const GLOBAL_STATS = {
-  total: DATA_A_JOUR.total,   // 39 274
-  odc: DATA_A_JOUR.total,     // même périmètre
-  fab: 410,
-  supercodeurs: 154500,
-  cyber: 4300,
-  partners: 60
-};
 
 const EMPTY_DASHBOARD = {
   totalParticipants: GLOBAL_STATS.total,

@@ -1,3 +1,4 @@
+import { DATA_A_JOUR } from '../data/odcStats';
 import React from 'react';
 import { X, BrainCircuit, Sparkles } from 'lucide-react';
 import { 
@@ -44,13 +45,22 @@ export default function AiModal({ isOpen, onClose, generating, analysis }) {
     return <p className="text-sm text-gray-600 leading-relaxed mb-4">{cleanLine}</p>;
   };
 
-  const projectionData = [
-    { year: '2023', val: 120000 },
-    { year: '2024', val: 156000 },
-    { year: '2025', val: 198000 },
-    { year: '2026 (Est)', val: 235000 },
-    { year: '2027 (Est)', val: 278000 },
-  ];
+  // Cumul reel par annee (source : odcStats), puis projection lineaire sur 2 ans
+  // basee sur la moyenne des 3 dernieres progressions annuelles.
+  const projectionData = (() => {
+    let cumul = 0;
+    const real = DATA_A_JOUR.years.map((y) => {
+      cumul += y.participants;
+      return { year: y.year, val: cumul };
+    });
+    const deltas = DATA_A_JOUR.years.slice(-3).map((y) => y.participants);
+    const step = Math.round(deltas.reduce((a, b) => a + b, 0) / deltas.length);
+    return [
+      ...real,
+      { year: '2027 (Est)', val: cumul + step },
+      { year: '2028 (Est)', val: cumul + step * 2 },
+    ];
+  })();
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
