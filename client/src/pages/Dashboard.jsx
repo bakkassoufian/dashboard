@@ -39,7 +39,7 @@ import {
   Legend
 } from 'recharts';
 import { STATIC_STATS } from '../data/staticStats';
- import { DATA_A_JOUR, S1_2026, GLOBAL_STATS, PCT_WOMEN, PCT_MEN } from '../data/odcStats';
+import { DATA_A_JOUR, S1_2026, GLOBAL_STATS, PCT_WOMEN, PCT_MEN, S1_2026_TOTAL, S1_2026_WOMEN } from '../data/odcStats';
 import S12026Stats from '../components/S12026Stats';
 
 function CountUp({ end, duration = 1500, suffix = '', prefix = '' }) {
@@ -234,17 +234,19 @@ export default function Dashboard() {
 
         {/* Floating Sub-cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-[-40px] px-4 relative z-20">
-           <HeroSubCard 
-             label="#OrangeDigitalCenter" 
-             icon={GraduationCap} 
-             mainValue={!hasFilters ? GLOBAL_STATS.odc : data.totalParticipants} 
-             mainPrefix={!hasFilters ? "+" : ""}
-             mainLabel="bénéficiaires"
+           {/* Le bandeau affiche le cumul (39 274) : cette carte montre la periode
+               en cours (S1 2026) pour ne pas repeter le meme chiffre. */}
+           <HeroSubCard
+             label="#OrangeDigitalCenter"
+             icon={GraduationCap}
+             mainValue={!hasFilters ? S1_2026_TOTAL : data.totalParticipants}
+             mainPrefix=""
+             mainLabel={!hasFilters ? "bénéficiaires (S1 2026)" : "bénéficiaires"}
              details={[
                !hasFilters
-                 ? `dont ${Math.round((DATA_A_JOUR.totalWomen / DATA_A_JOUR.total) * 100)}% de femmes`
+                 ? `dont ${Math.round((S1_2026_WOMEN / S1_2026_TOTAL) * 100)}% de femmes`
                  : `dont ${Math.round((data.womenBeneficiaries / (data.totalParticipants || 1)) * 100)}% de femmes`,
-               `${S1_2026.totalFormations} formations déployées (S1 2026)`,
+               `${S1_2026.totalFormations} formations déployées`,
                "+60% taux d'employabilité"
              ]}
            />
