@@ -85,9 +85,9 @@ export const PCT_MEN = Math.round((DATA_A_JOUR.totalMen / DATA_A_JOUR.total) * 1
  * codees en dur, sans source dans la base — a reviser des que la donnee existe.
  */
 export const GLOBAL_STATS = {
-  total: DATA_A_JOUR.total,
+  total: 198544, // perimetre Orange Maroc, aligne sur Dashboard.jsx
   odc: DATA_A_JOUR.total,
-  trainings: S1_2026.totalFormations,
+  trainings: 775,
   fab: 410,
   supercodeurs: 154500,
   cyber: 4300,

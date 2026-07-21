@@ -39,7 +39,6 @@ import {
   Legend
 } from 'recharts';
 import { STATIC_STATS } from '../data/staticStats';
-import { DATA_A_JOUR, S1_2026, GLOBAL_STATS, PCT_WOMEN, PCT_MEN, S1_2026_TOTAL, S1_2026_WOMEN } from '../data/odcStats';
 import AJourTable from '../components/AJourTable';
 
 function CountUp({ end, duration = 1500, suffix = '', prefix = '' }) {
@@ -63,10 +62,40 @@ function CountUp({ end, duration = 1500, suffix = '', prefix = '' }) {
   return <span>{prefix}{count.toLocaleString()}{suffix}</span>;
 }
 
+// CHIFFRES À JOUR (Pour les Analyses & Graphiques)
+// Source : tableau de suivi ODC Maroc. Total = somme exacte du detail.
+// NB : ne jamais ecrire les milliers avec un point (21.798 vaut 21,798 en JS).
+const DATA_A_JOUR = {
+  total: 39274,
+  years: [
+    { year: '2021', participants: 1727, women: 850, men: 877 },
+    { year: '2022', participants: 8278, women: 4165, men: 4113 },
+    { year: '2023', participants: 4701, women: 1978, men: 2723 },
+    { year: '2024', participants: 6152, women: 2417, men: 3735 },
+    { year: '2025', participants: 11242, women: 4619, men: 6623 },
+    { year: 'S1 2026', participants: 7174, women: 3447, men: 3727 },
+  ],
+  totalWomen: 17476,
+  totalMen: 21798,
+};
+
+const PCT_WOMEN = Math.round((DATA_A_JOUR.totalWomen / DATA_A_JOUR.total) * 100);
+const PCT_MEN = Math.round((DATA_A_JOUR.totalMen / DATA_A_JOUR.total) * 100);
+
+// CHIFFRES GLOBAUX (Pour le Hero / Overview par defaut)
+const GLOBAL_STATS = {
+  total: 198544,
+  odc: DATA_A_JOUR.total,
+  fab: 410,
+  supercodeurs: 154500,
+  cyber: 4300,
+  partners: 60
+};
+
 const EMPTY_DASHBOARD = {
   totalParticipants: GLOBAL_STATS.total,
   womenBeneficiaries: DATA_A_JOUR.totalWomen, // 17 476
-  totalTrainings: S1_2026.totalFormations,    // 143 (S1 2026)
+  totalTrainings: 775,
   totalStartups: 410,
   insertionRate: 60,
   childrenSuperCodeur: 154500,
@@ -239,14 +268,14 @@ export default function Dashboard() {
            <HeroSubCard
              label="#OrangeDigitalCenter"
              icon={GraduationCap}
-             mainValue={!hasFilters ? S1_2026_TOTAL : data.totalParticipants}
-             mainPrefix=""
-             mainLabel={!hasFilters ? "bénéficiaires (S1 2026)" : "bénéficiaires"}
+             mainValue={!hasFilters ? GLOBAL_STATS.odc : data.totalParticipants}
+             mainPrefix={!hasFilters ? "+" : ""}
+             mainLabel="bénéficiaires"
              details={[
                !hasFilters
-                 ? `dont ${Math.round((S1_2026_WOMEN / S1_2026_TOTAL) * 100)}% de femmes`
+                 ? `dont ${PCT_WOMEN}% de femmes`
                  : `dont ${Math.round((data.womenBeneficiaries / (data.totalParticipants || 1)) * 100)}% de femmes`,
-               `${S1_2026.totalFormations} formations déployées`,
+               "+775 formations déployées",
                "+60% taux d'employabilité"
              ]}
            />
