@@ -39,7 +39,6 @@ import {
   Legend
 } from 'recharts';
 import { STATIC_STATS } from '../data/staticStats';
-import AJourTable from '../components/AJourTable';
 
 function CountUp({ end, duration = 1500, suffix = '', prefix = '' }) {
   const [count, setCount] = useState(0);
@@ -284,11 +283,6 @@ export default function Dashboard() {
            <HeroSubCard label="#Cyberconfiance" icon={ShieldCheck} mainValue={GLOBAL_STATS.cyber} mainPrefix="+" mainLabel="enseignants formés" subLabel="#ForGoodConnections" details={["+3900 élèves ambassadeurs"]} />
            <HeroSubCard label="Partenariats" icon={Handshake} mainValue={GLOBAL_STATS.partners} mainPrefix="+" mainLabel="partenaires nationaux et internationaux" />
         </div>
-      </div>
-
-      {/* Tableau A JOUR : beneficiaires par annee (source : odcStats) */}
-      <div className="pt-4">
-        <AJourTable />
       </div>
 
       {/* Secondary Metrics & Charts - ALWAYS USE DATA_A_JOUR */}
