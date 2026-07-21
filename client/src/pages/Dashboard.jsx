@@ -39,7 +39,8 @@ import {
   Legend
 } from 'recharts';
 import { STATIC_STATS } from '../data/staticStats';
- import { DATA_A_JOUR, S1_2026, GLOBAL_STATS } from '../data/odcStats';
+ import { DATA_A_JOUR, S1_2026, GLOBAL_STATS, PCT_WOMEN, PCT_MEN } from '../data/odcStats';
+import S12026Stats from '../components/S12026Stats';
 
 function CountUp({ end, duration = 1500, suffix = '', prefix = '' }) {
   const [count, setCount] = useState(0);
@@ -254,6 +255,11 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Chiffres S1 2026 (source : odcStats) */}
+      <div className="pt-4">
+        <S12026Stats />
+      </div>
+
       {/* Secondary Metrics & Charts - ALWAYS USE DATA_A_JOUR */}
       <div className="pt-4 space-y-6">
         <div className="flex items-center justify-between">
@@ -282,8 +288,8 @@ export default function Dashboard() {
                  <PieChart>
                     <Pie 
                       data={[
-                        { name: 'Femmes', value: 44 },
-                        { name: 'Hommes', value: 56 }
+                        { name: 'Femmes', value: PCT_WOMEN },
+                        { name: 'Hommes', value: PCT_MEN }
                       ]} 
                       innerRadius={80} 
                       outerRadius={110} 

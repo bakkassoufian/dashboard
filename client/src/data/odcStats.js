@@ -62,6 +62,19 @@ export const S1_2026 = {
   totalFormations: 143,
 };
 
+/** Vue "par ODC" : regroupe EDC + FabLab d'un meme centre (Rabat 630+251=881, Agadir 2310+173=2483). */
+export const S1_2026_BY_ODC = Object.values(
+  S1_2026.byEntity.reduce((acc, r) => {
+    acc[r.entity] = acc[r.entity] || { entity: r.entity, participants: 0 };
+    acc[r.entity].participants += r.participants;
+    return acc;
+  }, {}),
+).sort((a, b) => b.participants - a.participants);
+
+export const S1_2026_TOTAL = S1_2026.months.reduce((t, m) => t + m.participants, 0);
+export const S1_2026_WOMEN = S1_2026.months.reduce((t, m) => t + m.women, 0);
+export const S1_2026_MEN = S1_2026.months.reduce((t, m) => t + m.men, 0);
+
 export const PCT_WOMEN = Math.round((DATA_A_JOUR.totalWomen / DATA_A_JOUR.total) * 100);
 export const PCT_MEN = Math.round((DATA_A_JOUR.totalMen / DATA_A_JOUR.total) * 100);
 
