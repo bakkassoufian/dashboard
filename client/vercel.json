@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://odc-dashboard-server.vercel.app/api/$1"
+      "destination": "https://dashboard-server-murex.vercel.app/api/$1"
     },
     {
       "source": "/(.*)",
