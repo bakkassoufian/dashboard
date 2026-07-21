@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+@import "leaflet/dist/leaflet.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --odc-orange: #FF7900;
+  --odc-black: #000000;
+  --bg-main: #fcfcfc;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --sidebar-w: 260px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-main);
+  color: var(--odc-black);
+}
+
+h1, h2, h3, .font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px -1px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 10px 32px -4px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+.glow-orange {
+  box-shadow: 0 0 20px -5px var(--odc-orange);
+}
+
+.premium-gradient {
+  background: linear-gradient(135deg, #FF7900 0%, #FF9A4D 100%);
+}
+
+.premium-dark-gradient {
+  background: linear-gradient(135deg, #000 0%, #333 100%);
+}

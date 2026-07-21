@@ -1,0 +1,27 @@
+# Dépendances
+node_modules/
+
+# Secrets
+.env
+.env.local
+*.env
+!.env.example
+
+# Builds
+client/dist/
+.vercel/
+
+# Uploads locaux (éphémères, remplacés par Cloudinary en prod)
+server/public/uploads/
+
+# Données métier réelles — ne pas publier
+*.xlsx
+*.pdf
+!demo-data/*.xlsx
+
+# Divers
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+scratch/
