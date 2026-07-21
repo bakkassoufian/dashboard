@@ -118,9 +118,12 @@ const S1_2026 = {
 };
 
 // CHIFFRES GLOBAUX (Pour le Hero / Overview par défaut)
+// total / odc proviennent du suivi ODC Maroc (DATA_A_JOUR) : chiffres vérifiables.
+// fab / supercodeurs / cyber / partners restent des valeurs institutionnelles
+// codées en dur, sans source dans la base — à réviser quand les données existeront.
 const GLOBAL_STATS = {
-  total: 198000,
-  odc: 32100,
+  total: DATA_A_JOUR.total,   // 39 274
+  odc: DATA_A_JOUR.total,     // même périmètre
   fab: 410,
   supercodeurs: 154500,
   cyber: 4300,
@@ -129,15 +132,15 @@ const GLOBAL_STATS = {
 
 const EMPTY_DASHBOARD = {
   totalParticipants: GLOBAL_STATS.total,
-  womenBeneficiaries: 14124, // 44% of 32100 roughly
-  totalTrainings: 775,
+  womenBeneficiaries: DATA_A_JOUR.totalWomen, // 17 476
+  totalTrainings: S1_2026.totalFormations,    // 143 (S1 2026)
   totalStartups: 410,
   insertionRate: 60,
   childrenSuperCodeur: 154500,
   monthlyTrend: [],
   genderDist: [
-    { name: 'Femmes', count: 44, color: '#FF7900' },
-    { name: 'Hommes', count: 56, color: '#000000' }
+    { name: 'Femmes', count: Math.round((DATA_A_JOUR.totalWomen / DATA_A_JOUR.total) * 100), color: '#FF7900' },
+    { name: 'Hommes', count: Math.round((DATA_A_JOUR.totalMen / DATA_A_JOUR.total) * 100), color: '#000000' }
   ],
   breakdownByEntityCenter: [],
   startupsByScope: [],
@@ -305,8 +308,10 @@ export default function Dashboard() {
              mainPrefix={!hasFilters ? "+" : ""}
              mainLabel="bénéficiaires"
              details={[
-               !hasFilters ? "dont 44% de femmes" : `dont ${Math.round((data.womenBeneficiaries / (data.totalParticipants || 1)) * 100)}% de femmes`,
-               "+775 formations déployées",
+               !hasFilters
+                 ? `dont ${Math.round((DATA_A_JOUR.totalWomen / DATA_A_JOUR.total) * 100)}% de femmes`
+                 : `dont ${Math.round((data.womenBeneficiaries / (data.totalParticipants || 1)) * 100)}% de femmes`,
+               `${S1_2026.totalFormations} formations déployées (S1 2026)`,
                "+60% taux d'employabilité"
              ]}
            />
