@@ -40,7 +40,7 @@ import {
 } from 'recharts';
 import { STATIC_STATS } from '../data/staticStats';
 import { DATA_A_JOUR, S1_2026, GLOBAL_STATS, PCT_WOMEN, PCT_MEN, S1_2026_TOTAL, S1_2026_WOMEN } from '../data/odcStats';
-import S12026Stats from '../components/S12026Stats';
+import AJourTable from '../components/AJourTable';
 
 function CountUp({ end, duration = 1500, suffix = '', prefix = '' }) {
   const [count, setCount] = useState(0);
@@ -257,9 +257,9 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Chiffres S1 2026 (source : odcStats) */}
+      {/* Tableau A JOUR : beneficiaires par annee (source : odcStats) */}
       <div className="pt-4">
-        <S12026Stats />
+        <AJourTable />
       </div>
 
       {/* Secondary Metrics & Charts - ALWAYS USE DATA_A_JOUR */}
